@@ -10,6 +10,7 @@ import Foundation
 enum Lamp: String{
    case off = "O"
    case yellow = "Y"
+   case red = "R"
 }
 
 struct BerlinClockLamps {
