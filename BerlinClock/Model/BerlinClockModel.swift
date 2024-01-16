@@ -25,19 +25,6 @@ extension BerlinClockModel {
     }
     
     private func checkOneMinuteLamp(minute: Int) -> [Lamp]{
-        
-        if (minute % 5) == 1 {
-            return [.yellow,.off,.off,.off]
-        }
-        if (minute % 5) == 2 {
-            return [.yellow,.yellow,.off,.off]
-        }
-        if (minute % 5) == 3 {
-            return [.yellow,.yellow,.yellow,.off]
-        }
-        if (minute % 5) == 4 {
-            return [.yellow,.yellow,.yellow,.yellow]
-        }
-       return [.off,.off,.off,.off]
+        (0..<4).map { $0 < (minute % 5) ? .yellow : .off}
     }
 }
