@@ -29,31 +29,31 @@ struct BerlinClockModel {
 
 extension BerlinClockModel {
     private func checkSecondsLamp(seconds: Int) -> Lamp{
-        ((seconds % 2) == 0) ?  .yellow : .off
+        ((seconds % AppConstants.secondsLampBlinkPer) == 0) ?  .yellow : .off
     }
     
     private func checkOneMinuteLamp(minute: Int) -> [Lamp]{
-        (0..<4).map { $0 < (minute % 5) ? .yellow : .off}
+        (0..<AppConstants.numberOfOneMinuteLamp).map { $0 < (minute % 5) ? .yellow : .off}
     }
     
     private func isQuarterMinute(_ minute: Int) -> Bool {
-        (minute % 3) == 0
+        (minute % AppConstants.quartersInFiveMinutesLamp) == 0
     }
     private func checkFiveMinuteLamp(minute: Int) -> [Lamp] {
         let onLamps: [Lamp] = (0..<(minute / 5)).map { index in
             isQuarterMinute(index + 1) ? .red : .yellow
         }
         
-        let offLamps = Array<Lamp>(repeating: .off, count: 11 - onLamps.count)
+        let offLamps = Array<Lamp>(repeating: .off, count: AppConstants.numberOfFiveMinuteLamp - onLamps.count)
         
         return onLamps + offLamps
     }
     
     private func checkOneHoursLamp(hour: Int) -> [Lamp]{
-        (0..<4).map { $0 < (hour % 5) ? .red : .off}
+        (0..<AppConstants.numberOfOneHourLamp).map { $0 < (hour % 5) ? .red : .off}
     }
     private func checkFiveHoursLamp(hour: Int) -> [Lamp]{
-        (0..<4).map { $0 < (hour / 5) ? .red : .off}
+        (0..<AppConstants.numberOfFiveHourLamp).map { $0 < (hour / 5) ? .red : .off}
     }
     
 }
