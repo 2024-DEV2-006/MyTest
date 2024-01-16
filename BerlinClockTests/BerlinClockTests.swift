@@ -24,6 +24,12 @@ final class BerlinClockTests: XCTestCase {
         XCTAssertEqual("Y", lamps.seconds.rawValue)
     }
     
+    func testOneMinutesLamp_AllOff(){
+        let date = getDate(hour: 00, minute: 00, second: 00)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("OOOO", lampsToString(lamps.oneMinutes))
+    }
+
 }
 
 extension BerlinClockTests {
@@ -33,4 +39,9 @@ extension BerlinClockTests {
         
         return date
     }
+    
+    func lampsToString(_ lamp:[Lamp]) -> String{
+        lamp.map({$0.rawValue}).joined()
+    }
+
 }

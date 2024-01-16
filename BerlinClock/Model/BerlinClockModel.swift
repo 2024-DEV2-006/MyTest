@@ -13,12 +13,18 @@ struct BerlinClockModel {
         let time = date.getTimeComponents()
         
         let secondsLamp = checkSecondsLamp(seconds: time.seconds)
-        
-        return BerlinClockLamps(seconds: secondsLamp)
+        let oneMinutesLamp = checkOneMinuteLamp(minute: time.minutes)
+
+        return BerlinClockLamps(seconds: secondsLamp, oneMinutes: oneMinutesLamp)
     }
+}
     
-    func checkSecondsLamp(seconds: Int) -> Lamp{
+extension BerlinClockModel {
+    private func checkSecondsLamp(seconds: Int) -> Lamp{
         ((seconds % 2) == 0) ?  .yellow : .off
     }
     
+    private func checkOneMinuteLamp(minute: Int) -> [Lamp]{
+        [.off,.off,.off,.off]
+    }
 }
