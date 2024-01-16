@@ -14,12 +14,14 @@ final class BerlinClockTests: XCTestCase {
     
     func testSecondsLamp_Off(){
         let date = getDate(hour: 00, minute: 00, second: 01)
-        XCTAssertEqual("O", berlinClock.convertToBerlinTime(date))
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("O", lamps.seconds.rawValue)
     }
     
     func testSecondsLamp_On(){
         let date = getDate(hour: 00, minute: 00, second: 02)
-        XCTAssertEqual("Y", berlinClock.convertToBerlinTime(date))
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("Y", lamps.seconds.rawValue)
     }
     
 }

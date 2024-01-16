@@ -9,16 +9,16 @@ import Foundation
 
 struct BerlinClockModel {
     
-    func convertToBerlinTime(_ date: Date) -> String {
-        
+    func convertToBerlinTime(_ date: Date) -> BerlinClockLamps {
         let time = date.getTimeComponents()
         
-        return checkSecondsLamp(seconds: time.seconds)
+        let secondsLamp = checkSecondsLamp(seconds: time.seconds)
         
+        return BerlinClockLamps(seconds: secondsLamp)
     }
     
-    func checkSecondsLamp(seconds: Int) -> String{
-        ((seconds % 2) == 0) ? "Y" : "O"
+    func checkSecondsLamp(seconds: Int) -> Lamp{
+        ((seconds % 2) == 0) ?  .yellow : .off
     }
     
 }
