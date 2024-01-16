@@ -122,6 +122,13 @@ final class BerlinClockTests: XCTestCase {
         let lamps = berlinClock.convertToBerlinTime(date)
         XCTAssertEqual("RRRR", lampsToString(lamps.fiveHours))
     }
+    
+    func testintegrateSecondMinuteAndHourLamp_AllOff(){
+        let date = getDate(hour: 00, minute: 00, second: 01)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("O OOOO OOOO OOOOOOOOOOO OOOO", integrateSecondMinuteAndHour(lamps: lamps))
+    }
+
 }
 
 extension BerlinClockTests {
@@ -135,5 +142,13 @@ extension BerlinClockTests {
     func lampsToString(_ lamp:[Lamp]) -> String{
         lamp.map({$0.rawValue}).joined()
     }
-
+    func integrateSecondMinuteAndHour(lamps: BerlinClockLamps)-> String{
+        let secondsLamp = lamps.seconds.rawValue
+        let fiveHoursLamps = lampsToString(lamps.fiveHours)
+        let oneHoursLamps = lampsToString(lamps.oneHours)
+        let fiveMinutesLamps = lampsToString(lamps.fiveMinutes)
+        let oneMinutesLamps = lampsToString(lamps.oneMinutes)
+                
+        return "\(secondsLamp) \(fiveHoursLamps) \(oneHoursLamps) \(fiveMinutesLamps) \(oneMinutesLamps)"
+    }
 }
