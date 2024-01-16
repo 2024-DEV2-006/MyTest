@@ -15,4 +15,6 @@ enum Lamp: String{
 struct BerlinClockLamps {
     var seconds: Lamp
     var oneMinutes: [Lamp]
+    var fiveMinutes: [Lamp]
+
 }
