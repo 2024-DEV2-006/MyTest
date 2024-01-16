@@ -16,11 +16,14 @@ struct BerlinClockModel {
         let oneMinutesLamp = checkOneMinuteLamp(minute: time.minutes)
         let fiveMinutesLamp = checkFiveMinuteLamp(minute: time.minutes)
         let oneHoursLamp = checkOneHoursLamp(hour: time.hours)
+        let fiveHoursLamp = checkFiveHoursLamp(hour: time.hours)
+
 
         return BerlinClockLamps(seconds: secondsLamp,
                                 oneMinutes: oneMinutesLamp,
                                 fiveMinutes: fiveMinutesLamp,
-                                oneHours: oneHoursLamp)
+                                oneHours: oneHoursLamp,
+                                fiveHours: fiveHoursLamp)
     }
 }
 
@@ -49,4 +52,8 @@ extension BerlinClockModel {
     private func checkOneHoursLamp(hour: Int) -> [Lamp]{
         (0..<4).map { $0 < (hour % 5) ? .red : .off}
     }
+    private func checkFiveHoursLamp(hour: Int) -> [Lamp]{
+        return [.off,.off,.off,.off]
+    }
+    
 }
