@@ -49,7 +49,7 @@ final class BerlinClockTests: XCTestCase {
         let lamps = berlinClock.convertToBerlinTime(date)
         XCTAssertEqual("YYYY", lampsToString(lamps.oneMinutes))
     }
-
+    
     func testFiveMinutesLamp_AllOff(){
         let date = getDate(hour: 00, minute: 00, second: 00)
         let lamps = berlinClock.convertToBerlinTime(date)
@@ -128,7 +128,16 @@ final class BerlinClockTests: XCTestCase {
         let lamps = berlinClock.convertToBerlinTime(date)
         XCTAssertEqual("O OOOO OOOO OOOOOOOOOOO OOOO", integrateSecondMinuteAndHour(lamps: lamps))
     }
-
+    func testIntegrateSecondMinuteAndHour_SecondsLampOn(){
+        let date = getDate(hour: 00, minute: 00, second: 00)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("Y OOOO OOOO OOOOOOOOOOO OOOO", integrateSecondMinuteAndHour(lamps: lamps))
+    }
+    func testIntegrateSecondMinuteAndHour_AllMinutesLampOn(){
+        let date = getDate(hour: 00, minute: 59, second: 59)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("O OOOO OOOO YYRYYRYYRYY YYYY", integrateSecondMinuteAndHour(lamps: lamps))
+    }
 }
 
 extension BerlinClockTests {
@@ -148,7 +157,7 @@ extension BerlinClockTests {
         let oneHoursLamps = lampsToString(lamps.oneHours)
         let fiveMinutesLamps = lampsToString(lamps.fiveMinutes)
         let oneMinutesLamps = lampsToString(lamps.oneMinutes)
-                
+        
         return "\(secondsLamp) \(fiveHoursLamps) \(oneHoursLamps) \(fiveMinutesLamps) \(oneMinutesLamps)"
     }
 }
