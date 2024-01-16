@@ -13,6 +13,7 @@
 		E65C87B52B5640E700056C4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E65C87B42B5640E700056C4D /* Preview Assets.xcassets */; };
 		E65C87BF2B5640E700056C4D /* BerlinClockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C87BE2B5640E700056C4D /* BerlinClockTests.swift */; };
 		E65C87E52B566BD300056C4D /* BerlinClockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C87E42B566BD300056C4D /* BerlinClockModel.swift */; };
+		E65C87E72B566C9900056C4D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C87E62B566C9900056C4D /* DateExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		E65C87BA2B5640E700056C4D /* BerlinClockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BerlinClockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E65C87BE2B5640E700056C4D /* BerlinClockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BerlinClockTests.swift; sourceTree = "<group>"; };
 		E65C87E42B566BD300056C4D /* BerlinClockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BerlinClockModel.swift; sourceTree = "<group>"; };
+		E65C87E62B566C9900056C4D /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 		E65C87DF2B565D7600056C4D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				E65C87E62B566C9900056C4D /* DateExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E65C87B02B5640E600056C4D /* BerlinClockView.swift in Sources */,
+				E65C87E72B566C9900056C4D /* DateExtension.swift in Sources */,
 				E65C87E52B566BD300056C4D /* BerlinClockModel.swift in Sources */,
 				E65C87AE2B5640E600056C4D /* BerlinClockApp.swift in Sources */,
 			);

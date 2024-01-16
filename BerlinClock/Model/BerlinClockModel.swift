@@ -9,14 +9,12 @@ import Foundation
 
 struct BerlinClockModel {
     
-    func convertToBerlinTime(_ time: String) -> String {
+    func convertToBerlinTime(_ date: Date) -> String {
         
-        let components = time.components(separatedBy: ":")
-        guard components.count == 3, let seconds = Int(components[2]) else {
-            return "Invalid time format"
-        }
+        let time = date.getTimeComponents()
         
-        return checkSecondsLamp(seconds:seconds)
+        return checkSecondsLamp(seconds: time.seconds)
+        
     }
     
     func checkSecondsLamp(seconds: Int) -> String{
