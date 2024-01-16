@@ -15,4 +15,8 @@ final class BerlinClockTests: XCTestCase {
       func testSecondsLamp_Off(){
           XCTAssertEqual("O", berlinClock.convertToBerlinTime("00:00:01"))
       }
+    func testSecondsLamp_On(){
+        XCTAssertEqual("Y", berlinClock.convertToBerlinTime("00:00:02"))
+    }
+
 }

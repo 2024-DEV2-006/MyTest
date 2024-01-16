@@ -20,7 +20,7 @@ struct BerlinClockModel {
     }
     
     func checkSecondsLamp(seconds: Int) -> String{
-        return "O"
+        ((seconds % 2) == 0) ? "Y" : "O"
     }
     
 }
