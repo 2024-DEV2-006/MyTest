@@ -53,7 +53,7 @@ extension BerlinClockModel {
         (0..<4).map { $0 < (hour % 5) ? .red : .off}
     }
     private func checkFiveHoursLamp(hour: Int) -> [Lamp]{
-        return [.off,.off,.off,.off]
+        (0..<4).map { $0 < (hour / 5) ? .red : .off}
     }
     
 }

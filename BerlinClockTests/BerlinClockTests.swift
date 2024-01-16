@@ -107,6 +107,21 @@ final class BerlinClockTests: XCTestCase {
         let lamps = berlinClock.convertToBerlinTime(date)
         XCTAssertEqual("OOOO", lampsToString(lamps.fiveHours))
     }
+    func testFiveHourLamp_FirstOn(){
+        let date = getDate(hour: 05, minute: 00, second: 00)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("ROOO", lampsToString(lamps.fiveHours))
+    }
+    func testFiveHourLamp_FirstAndSecondOn(){
+        let date = getDate(hour: 10, minute: 00, second: 00)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("RROO", lampsToString(lamps.fiveHours))
+    }
+    func testFiveHourLamp_AllOn(){
+        let date = getDate(hour: 20, minute: 00, second: 00)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("RRRR", lampsToString(lamps.fiveHours))
+    }
 }
 
 extension BerlinClockTests {
