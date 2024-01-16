@@ -35,6 +35,9 @@ extension BerlinClockModel {
         if (minute % 5) == 3 {
             return [.yellow,.yellow,.yellow,.off]
         }
+        if (minute % 5) == 4 {
+            return [.yellow,.yellow,.yellow,.yellow]
+        }
        return [.off,.off,.off,.off]
     }
 }
