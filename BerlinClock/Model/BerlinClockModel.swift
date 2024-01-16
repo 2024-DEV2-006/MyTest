@@ -15,11 +15,11 @@ struct BerlinClockModel {
         let secondsLamp = checkSecondsLamp(seconds: time.seconds)
         let oneMinutesLamp = checkOneMinuteLamp(minute: time.minutes)
         let fiveMinutesLamp = checkFiveMinuteLamp(minute: time.minutes)
-
+        
         return BerlinClockLamps(seconds: secondsLamp, oneMinutes: oneMinutesLamp, fiveMinutes: fiveMinutesLamp)
     }
 }
-    
+
 extension BerlinClockModel {
     private func checkSecondsLamp(seconds: Int) -> Lamp{
         ((seconds % 2) == 0) ?  .yellow : .off
@@ -28,11 +28,17 @@ extension BerlinClockModel {
     private func checkOneMinuteLamp(minute: Int) -> [Lamp]{
         (0..<4).map { $0 < (minute % 5) ? .yellow : .off}
     }
-    private func checkFiveMinuteLamp(minute: Int) -> [Lamp]{
-        var lamps = Array<Lamp>(repeating: .off, count: 11)
-        for i in 0..<(minute / 5) {
-            lamps[i] = ((i + 1) % 3) == 0 ? .red: .yellow
+    
+    private func isQuarterMinute(_ minute: Int) -> Bool {
+        (minute % 3) == 0
+    }
+    private func checkFiveMinuteLamp(minute: Int) -> [Lamp] {
+        let onLamps: [Lamp] = (0..<(minute / 5)).map { index in
+            isQuarterMinute(index + 1) ? .red : .yellow
         }
-        return lamps
+        
+        let offLamps = Array<Lamp>(repeating: .off, count: 11 - onLamps.count)
+        
+        return onLamps + offLamps
     }
 }
