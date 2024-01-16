@@ -17,5 +17,6 @@ struct BerlinClockLamps {
     var seconds: Lamp
     var oneMinutes: [Lamp]
     var fiveMinutes: [Lamp]
+    var oneHours: [Lamp]
 
 }

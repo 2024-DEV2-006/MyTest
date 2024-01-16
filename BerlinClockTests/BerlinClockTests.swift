@@ -80,6 +80,12 @@ final class BerlinClockTests: XCTestCase {
         let lamps = berlinClock.convertToBerlinTime(date)
         XCTAssertEqual("YYRYYRYYRYY", lampsToString(lamps.fiveMinutes))
     }
+    
+    func testOneHourLamp_AllOff(){
+        let date = getDate(hour: 00, minute: 00, second: 00)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("OOOO", lampsToString(lamps.oneHours))
+    }
 }
 
 extension BerlinClockTests {
