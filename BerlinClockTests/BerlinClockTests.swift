@@ -138,6 +138,17 @@ final class BerlinClockTests: XCTestCase {
         let lamps = berlinClock.convertToBerlinTime(date)
         XCTAssertEqual("O OOOO OOOO YYRYYRYYRYY YYYY", integrateSecondMinuteAndHour(lamps: lamps))
     }
+    func testIntegrateSecondMinuteAndHour_MaximumLampOn(){
+        let date = getDate(hour: 23, minute: 59, second: 58)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("Y RRRR RRRO YYRYYRYYRYY YYYY", integrateSecondMinuteAndHour(lamps: lamps))
+    }
+    func testIntegrateSecondMinuteAndHour_MaximumTime(){
+        let date = getDate(hour: 23, minute: 59, second: 59)
+        let lamps = berlinClock.convertToBerlinTime(date)
+        XCTAssertEqual("O RRRR RRRO YYRYYRYYRYY YYYY", integrateSecondMinuteAndHour(lamps: lamps))
+    }
+
 }
 
 extension BerlinClockTests {
