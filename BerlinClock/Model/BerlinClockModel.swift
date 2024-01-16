@@ -30,6 +30,9 @@ extension BerlinClockModel {
     }
     private func checkFiveMinuteLamp(minute: Int) -> [Lamp]{
         var lamps = Array<Lamp>(repeating: .off, count: 11)
+        for i in 0..<(minute / 5) {
+            lamps[i] = .yellow
+        }
         return lamps
     }
 }
