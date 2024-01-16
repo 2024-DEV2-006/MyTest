@@ -9,4 +9,10 @@ import XCTest
 @testable import BerlinClock
 
 final class BerlinClockTests: XCTestCase {
+    
+    let berlinClock = BerlinClockModel()
+
+      func testSecondsLamp_Off(){
+          XCTAssertEqual("O", berlinClock.convertToBerlinTime("00:00:01"))
+      }
 }
