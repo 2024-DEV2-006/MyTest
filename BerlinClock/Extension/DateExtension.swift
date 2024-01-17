@@ -19,4 +19,11 @@ extension Date {
         
         return (hours, minutes, seconds)
     }
+    
+    static func getDateFrom(hour: Int, minute: Int, second: Int, from date: Date = Date()) -> Date{
+        let calendar = Calendar.init(identifier: .gregorian)
+        let date = calendar.date(bySettingHour: hour, minute: minute, second: second, of: date)!
+        
+        return date
+    }
 }
