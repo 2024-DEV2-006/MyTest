@@ -12,8 +12,14 @@ struct BerlinClockView: View {
     var body: some View {
         VStack {
             DigitalClockView(digitalTime: viewModel.digitalTime)
+        }.onAppear {
+            viewModel.startTimer()
+        }
+        .onDisappear {
+            viewModel.stopTimer()
         }
         .padding()
+
     }
 }
 
