@@ -49,6 +49,30 @@ final class BerlinClockViewModelTest: XCTestCase {
         XCTAssertEqual(updatedLamps.fiveMinutes, [.yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow])
         XCTAssertEqual(updatedLamps.oneMinutes, [.yellow, .yellow, .yellow, .yellow])
     }
+    func testLamp_MaximumLampOn(){
+        let date = Date.getDateFrom(hour: 23, minute: 59, second: 58)
+        
+        berlinClockViewModel.convertToBerlinTime(date)
+        let updatedLamps = berlinClockViewModel.berlinClockLamps
+        
+        XCTAssertEqual(updatedLamps.seconds, .yellow)
+        XCTAssertEqual(updatedLamps.fiveHours, [.red, .red, .red, .red])
+        XCTAssertEqual(updatedLamps.oneHours, [.red, .red, .red, .off])
+        XCTAssertEqual(updatedLamps.fiveMinutes, [.yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow])
+        XCTAssertEqual(updatedLamps.oneMinutes, [.yellow, .yellow, .yellow, .yellow])
+    }
+    func testLamp_MaximumTime(){
+        let date = Date.getDateFrom(hour: 23, minute: 59, second: 59)
+        
+        berlinClockViewModel.convertToBerlinTime(date)
+        let updatedLamps = berlinClockViewModel.berlinClockLamps
+        
+        XCTAssertEqual(updatedLamps.seconds, .off)
+        XCTAssertEqual(updatedLamps.fiveHours, [.red, .red, .red, .red])
+        XCTAssertEqual(updatedLamps.oneHours, [.red, .red, .red, .off])
+        XCTAssertEqual(updatedLamps.fiveMinutes, [.yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow])
+        XCTAssertEqual(updatedLamps.oneMinutes, [.yellow, .yellow, .yellow, .yellow])
+    }
 
 }
     
