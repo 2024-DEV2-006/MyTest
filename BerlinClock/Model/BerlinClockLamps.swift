@@ -14,9 +14,9 @@ enum Lamp: String{
 }
 
 struct BerlinClockLamps {
-    var seconds: Lamp
-    var oneMinutes: [Lamp]
-    var fiveMinutes: [Lamp]
-    var oneHours: [Lamp]
-    var fiveHours: [Lamp]
+    var seconds: Lamp = .off
+    var oneMinutes: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfOneMinuteLamp)
+    var fiveMinutes: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfFiveMinuteLamp)
+    var oneHours: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfOneHourLamp)
+    var fiveHours: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfFiveHourLamp)
 }
