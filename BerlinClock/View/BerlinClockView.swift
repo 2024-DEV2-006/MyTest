@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct BerlinClockView: View {
+    @ObservedObject var viewModel = BerlinClockViewModel()
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            DigitalClockView(digitalTime: viewModel.digitalTime)
         }
         .padding()
     }
