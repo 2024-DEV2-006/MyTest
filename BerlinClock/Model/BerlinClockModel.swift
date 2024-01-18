@@ -26,11 +26,9 @@ extension BerlinClockModel {
     }
     
     private func checkOneMinuteLamp(minute: Int) -> [Lamp]{
-        let onLamps = minute % 5
-        var oneMinutesLamps = Array<Lamp>(repeating: .off, count: AppConstants.numberOfOneMinuteLamp)
-        oneMinutesLamps[..<onLamps] = ArraySlice(repeating: .yellow, count: onLamps)
-        
-        return oneMinutesLamps
+        retrieveLamps(totalLamps: AppConstants.numberOfOneMinuteLamp,
+                      onLamp: minute % 5,
+                      onLampColor: .yellow)
     }
     
     private func isQuarterMinute(_ minute: Int) -> Bool {
@@ -48,18 +46,20 @@ extension BerlinClockModel {
     }
     
     private func checkOneHoursLamp(hours: Int) -> [Lamp]{
-        let onLamps = hours % 5
-        var oneHoursLamps = Array<Lamp>(repeating: .off, count: AppConstants.numberOfOneHourLamp)
-        oneHoursLamps[..<onLamps] = ArraySlice(repeating: .red, count: onLamps)
-        
-        return oneHoursLamps
+        retrieveLamps(totalLamps: AppConstants.numberOfOneHourLamp,
+                      onLamp: hours % 5,
+                      onLampColor: .red)
     }
     private func checkFiveHoursLamp(hours: Int) -> [Lamp]{
-        let onLamps = hours / 5
-        var fiveHoursLamps = Array<Lamp>(repeating: .off, count: AppConstants.numberOfFiveHourLamp)
-        fiveHoursLamps[..<onLamps] = ArraySlice(repeating: .red, count: onLamps)
-        
-        return fiveHoursLamps
+        retrieveLamps(totalLamps: AppConstants.numberOfFiveHourLamp,
+                      onLamp: hours / 5,
+                      onLampColor: .red)
     }
     
+    private func retrieveLamps(totalLamps: Int, onLamp: Int, onLampColor: Lamp) -> [Lamp]{
+        let onLamps = Array<Lamp>(repeating: onLampColor, count: onLamp)
+        let offLamps = Array<Lamp>(repeating: .off, count: totalLamps - onLamp)
+                
+        return onLamps + offLamps
+    }
 }
