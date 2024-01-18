@@ -7,29 +7,28 @@
 
 import Foundation
 
-struct BerlinClockModel {
+final class BerlinClockModel {
     
+    private var berlinClockLamps: BerlinClockLamps!
+
     func convertToBerlinTime(_ date: Date) -> BerlinClockLamps {
-        let time = date.getTimeComponents()
         
-        let secondsLamp = checkSecondsLamp(seconds: time.seconds)
-        let oneMinutesLamp = checkOneMinuteLamp(minute: time.minutes)
-        let fiveMinutesLamp = checkFiveMinuteLamp(minute: time.minutes)
-        let oneHoursLamp = checkOneHoursLamp(hour: time.hours)
-        let fiveHoursLamp = checkFiveHoursLamp(hour: time.hours)
+        berlinClockLamps = BerlinClockLamps()
 
+        let time = date.getTimeComponents()
+        updateSecondsLamp(seconds: time.seconds)
+        berlinClockLamps.oneMinutes = checkOneMinuteLamp(minute: time.minutes)
+        berlinClockLamps.fiveMinutes = checkFiveMinuteLamp(minute: time.minutes)
+        berlinClockLamps.oneHours = checkOneHoursLamp(hour: time.hours)
+        berlinClockLamps.fiveHours = checkFiveHoursLamp(hour: time.hours)
 
-        return BerlinClockLamps(seconds: secondsLamp,
-                                oneMinutes: oneMinutesLamp,
-                                fiveMinutes: fiveMinutesLamp,
-                                oneHours: oneHoursLamp,
-                                fiveHours: fiveHoursLamp)
+        return berlinClockLamps
     }
 }
 
 extension BerlinClockModel {
-    private func checkSecondsLamp(seconds: Int) -> Lamp{
-        ((seconds % AppConstants.secondsLampBlinkPer) == 0) ?  .yellow : .off
+    private func updateSecondsLamp(seconds: Int){
+        berlinClockLamps.seconds = ((seconds % AppConstants.secondsLampBlinkPer) == 0) ?  .yellow : .off
     }
     
     private func checkOneMinuteLamp(minute: Int) -> [Lamp]{
