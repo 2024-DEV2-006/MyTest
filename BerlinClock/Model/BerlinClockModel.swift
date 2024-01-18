@@ -20,8 +20,8 @@ final class BerlinClockModel {
         updateSecondsLamp(seconds: time.seconds)
         updateOneMinutes(onLamps: (time.minutes % 5))
         updateFiveMinutes(onLamps: (time.minutes / 5))
-        berlinClockLamps.oneHours = checkOneHoursLamp(hour: time.hours)
-        berlinClockLamps.fiveHours = checkFiveHoursLamp(hour: time.hours)
+        updateOnehours(onLamps: (time.hours % 5))
+        updateFiveHours(onLamps: (time.hours / 5))
 
         return berlinClockLamps
     }
@@ -46,11 +46,11 @@ extension BerlinClockModel {
         berlinClockLamps.fiveMinutes[..<onLamps] = ArraySlice(onLight)
     }
     
-    private func checkOneHoursLamp(hour: Int) -> [Lamp]{
-        (0..<AppConstants.numberOfOneHourLamp).map { $0 < (hour % 5) ? .red : .off}
+    private func updateOnehours(onLamps: Int) {
+        berlinClockLamps.oneHours[..<onLamps] = ArraySlice(repeating: .red, count: onLamps)
     }
-    private func checkFiveHoursLamp(hour: Int) -> [Lamp]{
-        (0..<AppConstants.numberOfFiveHourLamp).map { $0 < (hour / 5) ? .red : .off}
+    private func updateFiveHours(onLamps: Int){
+        berlinClockLamps.fiveHours[..<onLamps] = ArraySlice(repeating: .red, count: onLamps)
     }
     
 }
