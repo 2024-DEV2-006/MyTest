@@ -11,11 +11,16 @@ import Foundation
 import SwiftUI
 
 class BerlinClockViewModel: ObservableObject {
-    var berlinClockLamps: BerlinClockLamps = BerlinClockLamps()
+    @Published var berlinClockLamps: BerlinClockLamps
     @Published var digitalTime: String = ""
     
     private let berlinClockModel = BerlinClockModel()
     private var timer: Timer?
+    
+    init() {
+        self.digitalTime = Date().toString()
+        self.berlinClockLamps = berlinClockModel.convertToBerlinTime(Date())
+    }
     
     func convertToBerlinTime(_ date: Date) {
         digitalTime = date.toString()

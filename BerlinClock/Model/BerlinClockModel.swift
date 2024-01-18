@@ -7,50 +7,59 @@
 
 import Foundation
 
-final class BerlinClockModel {
+struct BerlinClockModel {
     
-    private var berlinClockLamps: BerlinClockLamps!
-
     func convertToBerlinTime(_ date: Date) -> BerlinClockLamps {
-        
         let time = date.getTimeComponents()
-
-        berlinClockLamps = BerlinClockLamps()
-
-        updateSecondsLamp(seconds: time.seconds)
-        updateOneMinutes(onLamps: (time.minutes % 5))
-        updateFiveMinutes(onLamps: (time.minutes / 5))
-        updateOnehours(onLamps: (time.hours % 5))
-        updateFiveHours(onLamps: (time.hours / 5))
-
-        return berlinClockLamps
+        
+        return BerlinClockLamps(seconds: checkSecondsLamp(seconds: time.seconds),
+                                oneMinutes: checkOneMinuteLamp(minute: time.minutes),
+                                fiveMinutes: checkFiveMinuteLamp(minute: time.minutes),
+                                oneHours: checkOneHoursLamp(hours: time.hours),
+                                fiveHours: checkFiveHoursLamp(hours: time.hours))
     }
 }
 
 extension BerlinClockModel {
-    private func updateSecondsLamp(seconds: Int){
-        berlinClockLamps.seconds = ((seconds % AppConstants.secondsLampBlinkPer) == 0) ?  .yellow : .off
+    private func checkSecondsLamp(seconds: Int) -> Lamp{
+        ((seconds % AppConstants.secondsLampBlinkPer) == 0) ?  .yellow : .off
     }
     
-    private func updateOneMinutes(onLamps: Int){
-        berlinClockLamps.oneMinutes[..<onLamps] = ArraySlice(repeating: .yellow, count: onLamps)
+    private func checkOneMinuteLamp(minute: Int) -> [Lamp]{
+        let onLamps = minute % 5
+        var oneMinutesLamps = Array<Lamp>(repeating: .off, count: AppConstants.numberOfOneMinuteLamp)
+        oneMinutesLamps[..<onLamps] = ArraySlice(repeating: .yellow, count: onLamps)
+        
+        return oneMinutesLamps
     }
     
     private func isQuarterMinute(_ minute: Int) -> Bool {
         (minute % AppConstants.quartersInFiveMinutesLamp) == 0
     }
-    private func updateFiveMinutes(onLamps: Int){
+    private func checkFiveMinuteLamp(minute: Int) -> [Lamp] {
+        let onLamps = minute / 5
         let onLight: [Lamp] = (0..<onLamps).map { index in
             isQuarterMinute(index + 1) ? .red : .yellow
         }
-        berlinClockLamps.fiveMinutes[..<onLamps] = ArraySlice(onLight)
+        
+        let offLight = Array<Lamp>(repeating: .off, count: AppConstants.numberOfFiveMinuteLamp - onLamps)
+        
+        return onLight + offLight
     }
     
-    private func updateOnehours(onLamps: Int) {
-        berlinClockLamps.oneHours[..<onLamps] = ArraySlice(repeating: .red, count: onLamps)
+    private func checkOneHoursLamp(hours: Int) -> [Lamp]{
+        let onLamps = hours % 5
+        var oneHoursLamps = Array<Lamp>(repeating: .off, count: AppConstants.numberOfOneHourLamp)
+        oneHoursLamps[..<onLamps] = ArraySlice(repeating: .red, count: onLamps)
+        
+        return oneHoursLamps
     }
-    private func updateFiveHours(onLamps: Int){
-        berlinClockLamps.fiveHours[..<onLamps] = ArraySlice(repeating: .red, count: onLamps)
+    private func checkFiveHoursLamp(hours: Int) -> [Lamp]{
+        let onLamps = hours / 5
+        var fiveHoursLamps = Array<Lamp>(repeating: .off, count: AppConstants.numberOfFiveHourLamp)
+        fiveHoursLamps[..<onLamps] = ArraySlice(repeating: .red, count: onLamps)
+        
+        return fiveHoursLamps
     }
     
 }

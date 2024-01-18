@@ -44,6 +44,6 @@ struct BerlinClockLampsView: View {
 
 struct BerlinClockLampsView_Previews: PreviewProvider {
     static var previews: some View {
-        BerlinClockLampsView(berlinClockLamps: BerlinClockLamps())
+        BerlinClockLampsView(berlinClockLamps: BerlinClockLamps(seconds: .off, oneMinutes: [.off, .off, .off, .off], fiveMinutes: [.off, .off, .off, .off, .off, .off, .off, .off, .off, .off, .off], oneHours: [.off, .off, .off, .off], fiveHours: [.off, .off, .off, .off]))
     }
 }
