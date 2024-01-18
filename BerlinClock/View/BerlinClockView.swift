@@ -25,7 +25,8 @@ enum Lamp: String{
 }
 
 struct BerlinClockView: View {
-    @ObservedObject var viewModel = BerlinClockViewModel()
+    @ObservedObject var viewModel = BerlinClockViewModel(berlinClockModel: BerlinClockModel(), timer: AppTimer())
+    
     var body: some View {
         NavigationStack {
             VStack {

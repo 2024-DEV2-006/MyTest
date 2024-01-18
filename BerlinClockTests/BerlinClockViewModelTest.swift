@@ -10,69 +10,63 @@ import XCTest
 @testable import BerlinClock
 
 final class BerlinClockViewModelTest: XCTestCase {
+        
+    private var berlinClockViewModel: BerlinClockViewModel?
+    private let timer = MockAppTimer()
+    private let berlinClockModel = MockBerlinClockModel()
     
-    let berlinClockViewModel = BerlinClockViewModel()
+    override func setUp() {
+        berlinClockViewModel = BerlinClockViewModel(berlinClockModel: berlinClockModel, timer: timer)
+    }
+    func testInitialState(){
+        let berlinClockLamps = BerlinClockLamps(seconds: .off,
+                                                oneMinutes: [.off, .off, .off, .off],
+                                                fiveMinutes: [.off, .off, .off, .off, .off, .off, .off, .off, .off,.off,.off],
+                                                oneHours: [.off, .off, .off, .off],
+                                                fiveHours: [.off, .off, .off, .off])
+        XCTAssertEqual(berlinClockViewModel?.berlinClockLamps, berlinClockLamps)
+        XCTAssertEqual(berlinClockViewModel?.digitalTime, "00:00:00")
+    }
+    func testLampsUpdatedOnView(){
+        let berlinClockLamps = BerlinClockLamps(seconds: .yellow,
+                                                oneMinutes: [.yellow, .yellow, .yellow, .yellow],
+                                                fiveMinutes: [.yellow, .yellow, .red, .yellow, .yellow, .off, .yellow, .yellow, .red,.yellow,.yellow],
+                                                oneHours: [.red, .red, .red, .off],
+                                                fiveHours: [.red, .red, .red, .red])
+                                                
+        berlinClockModel.mockBerlinClockLamps(berlinClockLamps:berlinClockLamps)
+        berlinClockViewModel?.startTimer()
+        timer.mockSecondChange(toDate: Date.getDateFrom(hour: 23, minute: 59, second: 58))
     
-    func testLamps_AllOff(){
-        let date = Date.getDateFrom(hour: 00, minute: 00, second: 01)
-        
-        berlinClockViewModel.convertToBerlinTime(date)
-        let updatedLamps = berlinClockViewModel.berlinClockLamps
-        
-        XCTAssertEqual(updatedLamps.seconds, .off)
-        XCTAssertEqual(updatedLamps.fiveHours, [.off, .off, .off, .off])
-        XCTAssertEqual(updatedLamps.oneHours, [.off, .off, .off, .off])
-        XCTAssertEqual(updatedLamps.fiveMinutes, [.off, .off, .off, .off, .off, .off, .off, .off, .off, .off, .off])
-        XCTAssertEqual(updatedLamps.oneMinutes, [.off, .off, .off, .off])
-    }
-    func testLamp_SecondsOn(){
-        let date = Date.getDateFrom(hour: 00, minute: 00, second: 00)
-        
-        berlinClockViewModel.convertToBerlinTime(date)
-        let updatedLamps = berlinClockViewModel.berlinClockLamps
-        
-        XCTAssertEqual(updatedLamps.seconds, .yellow)
-        XCTAssertEqual(updatedLamps.fiveHours, [.off, .off, .off, .off])
-        XCTAssertEqual(updatedLamps.oneHours, [.off, .off, .off, .off])
-        XCTAssertEqual(updatedLamps.fiveMinutes, [.off, .off, .off, .off, .off, .off, .off, .off, .off, .off, .off])
-        XCTAssertEqual(updatedLamps.oneMinutes, [.off, .off, .off, .off])
-    }
-    func testLamp_AllMinutesOn(){
-        let date = Date.getDateFrom(hour: 00, minute: 59, second: 01)
-        
-        berlinClockViewModel.convertToBerlinTime(date)
-        let updatedLamps = berlinClockViewModel.berlinClockLamps
-        
-        XCTAssertEqual(updatedLamps.seconds, .off)
-        XCTAssertEqual(updatedLamps.fiveHours, [.off, .off, .off, .off])
-        XCTAssertEqual(updatedLamps.oneHours, [.off, .off, .off, .off])
-        XCTAssertEqual(updatedLamps.fiveMinutes, [.yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow])
-        XCTAssertEqual(updatedLamps.oneMinutes, [.yellow, .yellow, .yellow, .yellow])
-    }
-    func testLamp_MaximumLampOn(){
-        let date = Date.getDateFrom(hour: 23, minute: 59, second: 58)
-        
-        berlinClockViewModel.convertToBerlinTime(date)
-        let updatedLamps = berlinClockViewModel.berlinClockLamps
-        
-        XCTAssertEqual(updatedLamps.seconds, .yellow)
-        XCTAssertEqual(updatedLamps.fiveHours, [.red, .red, .red, .red])
-        XCTAssertEqual(updatedLamps.oneHours, [.red, .red, .red, .off])
-        XCTAssertEqual(updatedLamps.fiveMinutes, [.yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow])
-        XCTAssertEqual(updatedLamps.oneMinutes, [.yellow, .yellow, .yellow, .yellow])
-    }
-    func testLamp_MaximumTime(){
-        let date = Date.getDateFrom(hour: 23, minute: 59, second: 59)
-        
-        berlinClockViewModel.convertToBerlinTime(date)
-        let updatedLamps = berlinClockViewModel.berlinClockLamps
-        
-        XCTAssertEqual(updatedLamps.seconds, .off)
-        XCTAssertEqual(updatedLamps.fiveHours, [.red, .red, .red, .red])
-        XCTAssertEqual(updatedLamps.oneHours, [.red, .red, .red, .off])
-        XCTAssertEqual(updatedLamps.fiveMinutes, [.yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow, .red, .yellow, .yellow])
-        XCTAssertEqual(updatedLamps.oneMinutes, [.yellow, .yellow, .yellow, .yellow])
-    }
+        XCTAssertEqual(berlinClockViewModel?.berlinClockLamps, berlinClockLamps)
+        XCTAssertEqual(berlinClockViewModel?.digitalTime, "23:59:58")
 
+    }
 }
     
+private final class MockAppTimer: AppTimerProtocol {
+ 
+    private var secondChangeCallback:((Date) -> Void)?
+    
+    func startTimer (secondChangeCallback: @escaping (Date) -> Void) {
+        self.secondChangeCallback = secondChangeCallback
+    }
+    func stopTimer() {
+        self.secondChangeCallback = nil
+    }
+    func mockSecondChange (toDate: Date) {
+        secondChangeCallback?(toDate)
+    }
+}
+
+private final class MockBerlinClockModel: BerlinClockModelProtocol {
+    
+    private var berlinClockLamps: BerlinClockLamps!
+    
+    func convertToBerlinTime (_ date: Date) -> BerlinClockLamps{
+        return berlinClockLamps
+    }
+    func mockBerlinClockLamps(berlinClockLamps: BerlinClockLamps) {
+        self.berlinClockLamps = berlinClockLamps
+    }
+}

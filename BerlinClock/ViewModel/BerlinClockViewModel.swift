@@ -11,18 +11,18 @@ import Foundation
 import SwiftUI
 
 class BerlinClockViewModel: ObservableObject {
-    @Published var berlinClockLamps: BerlinClockLamps
-    @Published var digitalTime: String = ""
+    @Published var berlinClockLamps: BerlinClockLamps = BerlinClockLamps.emptyclock
+    @Published var digitalTime: String = "00:00:00"
     
-    private let berlinClockModel = BerlinClockModel()
-    private var timer: Timer?
+    private let berlinClockModel: BerlinClockModelProtocol
+    private var timer: AppTimerProtocol
     
-    init() {
-        self.digitalTime = Date().toString()
-        self.berlinClockLamps = berlinClockModel.convertToBerlinTime(Date())
+    init(berlinClockModel: BerlinClockModelProtocol, timer: AppTimerProtocol) {
+        self.berlinClockModel = berlinClockModel
+        self.timer = timer
     }
     
-    func convertToBerlinTime(_ date: Date) {
+    private func convertToBerlinTime(_ date: Date) {
         digitalTime = date.toString()
         berlinClockLamps = berlinClockModel.convertToBerlinTime(date)
     }
@@ -31,14 +31,13 @@ class BerlinClockViewModel: ObservableObject {
 extension BerlinClockViewModel {
     
     func startTimer() {
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            self.convertToBerlinTime(Date())
+        timer.startTimer { [weak self] date in
+            self?.convertToBerlinTime(date)
         }
     }
     
     func stopTimer() {
-        timer?.invalidate()
-        timer = nil
+        timer.stopTimer()
     }
 }
 
