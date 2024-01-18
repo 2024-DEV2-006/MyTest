@@ -21,6 +21,7 @@
 		E6F7339E2B57EB3000EC06E3 /* DigitalClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7339D2B57EB3000EC06E3 /* DigitalClockView.swift */; };
 		E6F733AF2B58FF6400EC06E3 /* SecondsLampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F733AE2B58FF6400EC06E3 /* SecondsLampView.swift */; };
 		E6F733B12B59004900EC06E3 /* FiveMinuteLampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F733B02B59004900EC06E3 /* FiveMinuteLampView.swift */; };
+		E6F733B32B59010F00EC06E3 /* LampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F733B22B59010F00EC06E3 /* LampView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		E6F7339D2B57EB3000EC06E3 /* DigitalClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalClockView.swift; sourceTree = "<group>"; };
 		E6F733AE2B58FF6400EC06E3 /* SecondsLampView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondsLampView.swift; sourceTree = "<group>"; };
 		E6F733B02B59004900EC06E3 /* FiveMinuteLampView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiveMinuteLampView.swift; sourceTree = "<group>"; };
+		E6F733B22B59010F00EC06E3 /* LampView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				E6F7339D2B57EB3000EC06E3 /* DigitalClockView.swift */,
 				E6F733AE2B58FF6400EC06E3 /* SecondsLampView.swift */,
 				E6F733B02B59004900EC06E3 /* FiveMinuteLampView.swift */,
+				E6F733B22B59010F00EC06E3 /* LampView.swift */,
 			);
 			path = HelperView;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				E6F733B12B59004900EC06E3 /* FiveMinuteLampView.swift in Sources */,
 				E65C87E72B566C9900056C4D /* DateExtension.swift in Sources */,
 				E65C87E52B566BD300056C4D /* BerlinClockModel.swift in Sources */,
+				E6F733B32B59010F00EC06E3 /* LampView.swift in Sources */,
 				E6F733AF2B58FF6400EC06E3 /* SecondsLampView.swift in Sources */,
 				E6F7339E2B57EB3000EC06E3 /* DigitalClockView.swift in Sources */,
 				E65C87AE2B5640E600056C4D /* BerlinClockApp.swift in Sources */,
