@@ -38,7 +38,7 @@
 /* Begin PBXFileReference section */
 		E65C87AA2B5640E600056C4D /* BerlinClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BerlinClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E65C87AD2B5640E600056C4D /* BerlinClockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BerlinClockApp.swift; sourceTree = "<group>"; };
-		E65C87AF2B5640E600056C4D /* BerlinClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BerlinClockView.swift; sourceTree = "<group>"; };
+		E65C87AF2B5640E600056C4D /* BerlinClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BerlinClockView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		E65C87B12B5640E700056C4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E65C87B42B5640E700056C4D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E65C87BA2B5640E700056C4D /* BerlinClockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BerlinClockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };

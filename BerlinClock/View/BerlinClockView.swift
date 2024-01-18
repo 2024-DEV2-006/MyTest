@@ -27,16 +27,21 @@ enum Lamp: String{
 struct BerlinClockView: View {
     @ObservedObject var viewModel = BerlinClockViewModel()
     var body: some View {
-        VStack {
-            DigitalClockView(digitalTime: viewModel.digitalTime)
-        }.onAppear {
-            viewModel.startTimer()
+        NavigationStack {
+            VStack {
+                BerlinClockLampsView(berlinClockLamps: viewModel.berlinClockLamps)
+                    .frame(width: 150, height: 200)
+                
+                DigitalClockView(digitalTime: viewModel.digitalTime)
+            }.onAppear {
+                viewModel.startTimer()
+            }
+            .onDisappear {
+                viewModel.stopTimer()
+            }
+            .padding()
+            .navigationTitle("Berlin Clock")
         }
-        .onDisappear {
-            viewModel.stopTimer()
-        }
-        .padding()
-
     }
 }
 
