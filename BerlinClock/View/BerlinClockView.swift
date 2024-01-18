@@ -7,6 +7,23 @@
 
 import SwiftUI
 
+enum Lamp: String{
+   case off = "O"
+   case yellow = "Y"
+   case red = "R"
+    
+    var color: Color {
+        switch self {
+        case .off:
+            return .gray
+        case .yellow:
+            return .yellow
+        case .red:
+            return .red
+        }
+    }
+}
+
 struct BerlinClockView: View {
     @ObservedObject var viewModel = BerlinClockViewModel()
     var body: some View {
