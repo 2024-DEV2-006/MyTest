@@ -42,16 +42,23 @@ final class BerlinClockViewModelTest: XCTestCase {
         XCTAssertEqual(berlinClockViewModel?.digitalTime, "23:59:58")
 
     }
+    func testStopTimer(){
+        berlinClockViewModel?.stopTimer()
+        
+        XCTAssertTrue(timer.hasStoppedTimer)
+    }
 }
     
 private final class MockAppTimer: AppTimerProtocol {
  
+    var hasStoppedTimer = false
     private var secondChangeCallback:((Date) -> Void)?
     
     func startTimer (secondChangeCallback: @escaping (Date) -> Void) {
         self.secondChangeCallback = secondChangeCallback
     }
     func stopTimer() {
+        hasStoppedTimer = true
         self.secondChangeCallback = nil
     }
     func mockSecondChange (toDate: Date) {
