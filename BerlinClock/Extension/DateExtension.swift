@@ -22,7 +22,7 @@ extension Date {
     
     static func getDateFrom(hour: Int, minute: Int, second: Int, from date: Date = Date()) -> Date{
         let calendar = Calendar.init(identifier: .gregorian)
-        let date = calendar.date(bySettingHour: hour, minute: minute, second: second, of: date)!
+        guard let date = calendar.date(bySettingHour: hour, minute: minute, second: second, of: date) else { return date }
         
         return date
     }
