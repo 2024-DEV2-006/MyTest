@@ -7,9 +7,6 @@
 
 import Foundation
 
-import Foundation
-import SwiftUI
-
 class BerlinClockViewModel: ObservableObject {
     @Published var berlinClockLamps: BerlinClockLamps = BerlinClockLamps.emptyclock
     @Published var digitalTime: String = "00:00:00"
